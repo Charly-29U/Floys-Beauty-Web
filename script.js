@@ -7,7 +7,7 @@ import gsap from "https://esm.sh/gsap@3.12.5";
 import { ScrollTrigger } from "https://esm.sh/gsap@3.12.5/ScrollTrigger";
 
 /** WhatsApp Colombia (57) + número sin + ni espacios */
-const WHATSAPP_NUMERO = "573226624007";
+const WHATSAPP_NUMERO = "573226968900";
 
 
 let selectedCatalogService = null;
