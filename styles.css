@@ -1,20 +1,20 @@
 /* ============================================
-   Glam Hub — Futurista (Apple × cyberpunk)
+   Glam Hub — Floys Beauty (White & Gold)
    ============================================ */
 
 :root {
-  --bg-0: #0a080e;
-  --bg-1: #120c16;
-  --glass: rgba(28, 22, 38, 0.52);
-  --glass-border: rgba(255, 230, 245, 0.14);
-  --text: #fdf8fc;
-  --muted: rgba(253, 248, 252, 0.62);
-  --accent: #d4a5d9;
-  --accent-2: #c9a962;
-  --accent-3: #f9a8c8;
-  --accent-soft: #e8b4d4;
-  --glow: 0 0 36px rgba(212, 165, 217, 0.28);
-  --glow-gold: 0 0 28px rgba(201, 169, 98, 0.22);
+  --bg-0: #ffffff;
+  --bg-1: #faf8f5;
+  --glass: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(197, 157, 95, 0.2);
+  --text: #2c2a28;
+  --muted: #6b655f;
+  --accent: #c59d5f;
+  --accent-2: #c28b7b;
+  --accent-3: #a0743b;
+  --accent-soft: #e7c996;
+  --glow: 0 0 36px rgba(197, 157, 95, 0.15);
+  --glow-gold: 0 0 28px rgba(194, 139, 123, 0.15);
   --radius: 20px;
   --radius-sm: 12px;
   --font-display: "Syne", system-ui, sans-serif;
@@ -47,10 +47,10 @@ body {
   inset: 0;
   z-index: -2;
   background:
-    radial-gradient(ellipse 85% 55% at 15% 18%, rgba(180, 120, 200, 0.28), transparent 58%),
-    radial-gradient(ellipse 70% 50% at 85% 25%, rgba(201, 169, 98, 0.12), transparent 52%),
-    radial-gradient(ellipse 65% 48% at 50% 92%, rgba(249, 168, 200, 0.22), transparent 55%),
-    linear-gradient(168deg, #0a080e 0%, #140e1a 42%, #0c1018 100%);
+    radial-gradient(ellipse 85% 55% at 15% 18%, rgba(231, 201, 150, 0.28), transparent 58%),
+    radial-gradient(ellipse 70% 50% at 85% 25%, rgba(197, 157, 95, 0.12), transparent 52%),
+    radial-gradient(ellipse 65% 48% at 50% 92%, rgba(194, 139, 123, 0.22), transparent 55%),
+    linear-gradient(168deg, #ffffff 0%, #faf8f5 42%, #f5efe6 100%);
   animation: fluid-shift 18s ease-in-out infinite alternate;
 }
 
@@ -86,8 +86,8 @@ body {
   border: 1px solid var(--glass-border);
   border-radius: var(--radius);
   box-shadow:
-    0 4px 24px rgba(0, 0, 0, 0.35),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    0 4px 24px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
 /* Header */
@@ -120,13 +120,13 @@ body {
 
 .logo-icon {
   height: 1.8em;
-  width: auto;
-  object-fit: contain;
-  border-radius: 4px;
+  width: 1.8em;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .logo-accent {
-  background: linear-gradient(120deg, #e8b4d4, #c9a962);
+  background: linear-gradient(120deg, var(--accent), var(--accent-2));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -182,7 +182,7 @@ body {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #b87cb8 0%, #d9468f 45%, #c9a962 100%);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 45%, var(--accent-3) 100%);
   background-size: 200% 200%;
   color: #fff;
   animation: btn-gradient 10s ease infinite;
@@ -210,7 +210,7 @@ body {
 }
 
 .btn-ghost {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(197, 157, 95, 0.08);
   color: var(--text);
   border: 1px solid var(--glass-border);
 }
@@ -255,7 +255,7 @@ body {
 }
 
 .text-gradient {
-  background: linear-gradient(125deg, #e8b4d4, #c9a962, #f9a8c8);
+  background: linear-gradient(125deg, var(--accent), var(--accent-2), var(--accent-3));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -299,7 +299,7 @@ body {
 .orb-a {
   width: 280px;
   height: 280px;
-  background: #7c3aed;
+  background: var(--accent);
   top: 10%;
   left: 5%;
 }
@@ -307,7 +307,7 @@ body {
 .orb-b {
   width: 200px;
   height: 200px;
-  background: #22d3ee;
+  background: var(--accent-2);
   bottom: 15%;
   right: 10%;
   animation-delay: -4s;
@@ -316,7 +316,7 @@ body {
 .orb-c {
   width: 160px;
   height: 160px;
-  background: #fb7185;
+  background: var(--accent-3);
   top: 40%;
   right: 25%;
   animation-delay: -7s;
@@ -1596,4 +1596,65 @@ kbd {
 .layer-lips {
   mix-blend-mode: multiply;
   filter: blur(1px);
+}
+
+/* Footer Centralizado */
+.site-footer {
+  padding: 2.5rem 1.5rem;
+  margin: 3rem auto 1rem;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+.site-footer .footer-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.site-footer .social-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.site-footer .social-link {
+  color: var(--muted);
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.site-footer .social-link:hover {
+  color: var(--accent);
+  transform: translateY(-3px) scale(1.15);
+}
+
+.site-footer .social-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.site-footer .social-name {
+  display: none !important; /* Visualmente más nítido con solo iconos */
+}
+
+.site-footer .footer-tech {
+  font-size: 0.8rem;
+  color: var(--muted);
+  opacity: 0.7;
+  display: block;
 }
