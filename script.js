@@ -10,11 +10,12 @@ import { ScrollTrigger } from "https://esm.sh/gsap@3.12.5/ScrollTrigger";
 const WHATSAPP_NUMERO = "573226968900";
 
 
-let selectedCatalogService = null;
-let selectedCatalogServiceImg = null;
-if (typeof localStorage !== "undefined") {
-  selectedCatalogService = localStorage.getItem("glamHubSelectedService") || null;
-  selectedCatalogServiceImg = localStorage.getItem("glamHubSelectedImg") || null;
+let selectedServices = [];
+if (typeof sessionStorage !== "undefined") {
+  try {
+    const saved = sessionStorage.getItem("floysBeautySelectedServices");
+    if (saved) selectedServices = JSON.parse(saved);
+  } catch(e) { selectedServices = []; }
 }
 
 /**
@@ -58,12 +59,12 @@ function wireUi() {
 
     let detalleMaquillaje = "";
     if (makeupSource === "catalogo") {
-      if (!selectedCatalogService) {
-        msg.textContent = "Selecciona un servicio del catálogo.";
+      if (!selectedServices || selectedServices.length === 0) {
+        msg.textContent = "Selecciona al menos un servicio del catálogo.";
         msg.className = "form-msg err";
         return;
       }
-      detalleMaquillaje = `Del catálogo: ${selectedCatalogService}`;
+      detalleMaquillaje = "Del catálogo:\n" + selectedServices.map(s => `- ${s.title}`).join("\n");
     }
 
     if (!WHATSAPP_NUMERO || !/^\d{10,15}$/.test(WHATSAPP_NUMERO)) {
@@ -73,9 +74,9 @@ function wireUi() {
     }
 
     const body = [
-      "Hola linda, quisiera reservar un servicio de maquillaje:",
+      "Hola linda, quisiera reservar:",
       `Nombre: ${nombre}`,
-      `Tipo: ${detalleMaquillaje}`,
+      `Servicios:\n${detalleMaquillaje}`,
       `Fecha: ${fecha}`,
       `Hora: ${hora}`,
     ].join("\n");
@@ -93,12 +94,10 @@ function wireUi() {
     msg.className = "form-msg ok";
     e.target.reset();
 
-    if (typeof localStorage !== "undefined") {
-      localStorage.removeItem("glamHubSelectedService");
-      localStorage.removeItem("glamHubSelectedImg");
+    if (typeof sessionStorage !== "undefined") {
+      sessionStorage.removeItem("floysBeautySelectedServices");
     }
-    selectedCatalogService = null;
-    selectedCatalogServiceImg = null;
+    selectedServices = [];
     updateBookingPreview();
   });
 
@@ -253,33 +252,45 @@ function showToast(msg) {
   setTimeout(() => toast.classList.remove("show"), 3500);
 }
 
-/**
- * Actualiza la vista previa visual (pequeña tarjeta) en el formulario de reservas, 
- * dependiendo de si se seleccionó un servicio especial del catálogo.
- */
+window.removeService = function(index) {
+  selectedServices.splice(index, 1);
+  if (typeof sessionStorage !== "undefined") {
+    sessionStorage.setItem("floysBeautySelectedServices", JSON.stringify(selectedServices));
+  }
+  updateBookingPreview();
+};
+
 function updateBookingPreview() {
   const previewContainer = document.querySelector("#booking-preview-container .booking-card");
-  const previewText = document.getElementById("booking-preview-text");
   const source = document.querySelector('input[name="makeup_source"]:checked')?.value;
 
-  if (!previewContainer || !previewText) return;
+  if (!previewContainer) return;
 
   previewContainer.innerHTML = '';
   previewContainer.className = 'booking-card';
 
   if (source === 'catalogo') {
-    if (selectedCatalogService) {
+    if (selectedServices && selectedServices.length > 0) {
       previewContainer.classList.add('has-data');
-      previewContainer.innerHTML = `<div class="booking-info" style="display:flex; align-items:center; gap: 1rem;">
-        ${selectedCatalogServiceImg ? `<img src="${selectedCatalogServiceImg}" alt="Preview" style="width: 55px; height: 55px; border-radius: 8px; object-fit: cover; border: 1px solid var(--glass-border); flex-shrink: 0;" />` : ''}
-        <div style="display:flex; flex-direction:column;">
-          <strong style="color:var(--primary); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px;">Del catálogo</strong>
-          <span style="color:var(--text); font-weight:600; font-size: 1.05rem;">${selectedCatalogService}</span>
-        </div>
-      </div>`;
+      
+      let html = `<div style="margin-bottom: 12px;"><strong style="color:var(--primary); font-size: 0.85rem; text-transform: uppercase;">Servicios agendados:</strong></div>`;
+      html += `<div style="display:flex; flex-direction:column; gap: 12px;">`;
+      
+      selectedServices.forEach((serv, index) => {
+        html += `<div class="booking-info" style="display:flex; align-items:center; justify-content:space-between; gap: 1rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 8px;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <img src="${serv.img}" alt="Preview" style="width: 45px; height: 45px; border-radius: 8px; object-fit: cover; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" />
+            <span style="color:var(--text); font-weight:600; font-size: 0.95rem;">${serv.title}</span>
+          </div>
+          <button type="button" onclick="removeService(${index})" style="background:none; border:none; color:red; cursor:pointer; font-weight:bold; font-size:1.4rem; padding: 0 8px; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">&times;</button>
+        </div>`;
+      });
+      
+      html += `</div>`;
+      previewContainer.innerHTML = html;
     } else {
       previewContainer.classList.add('empty');
-      previewContainer.innerHTML = `<span id="booking-preview-text">Selecciona un servicio en el catálogo.</span>`;
+      previewContainer.innerHTML = `<span id="booking-preview-text">Selecciona uno o más servicios en el catálogo.</span>`;
     }
   }
 }
@@ -306,11 +317,9 @@ function loadCatalog(category) {
 
   document.querySelectorAll(".btn-select-service").forEach(btn => {
     btn.addEventListener("click", () => {
-      selectedCatalogService = btn.dataset.title;
-      selectedCatalogServiceImg = btn.dataset.img;
-      if (typeof localStorage !== "undefined") {
-        localStorage.setItem("glamHubSelectedService", selectedCatalogService);
-        localStorage.setItem("glamHubSelectedImg", selectedCatalogServiceImg);
+      selectedServices.push({ title: btn.dataset.title, img: btn.dataset.img });
+      if (typeof sessionStorage !== "undefined") {
+        sessionStorage.setItem("floysBeautySelectedServices", JSON.stringify(selectedServices));
       }
 
       const radio = document.querySelector('input[name="makeup_source"][value="catalogo"]');
@@ -318,16 +327,7 @@ function loadCatalog(category) {
 
       updateBookingPreview();
 
-      const reservasSeccion = document.getElementById("reservas");
-      if (reservasSeccion) {
-        showToast(`Estilo "${selectedCatalogService}" seleccionado para reservar.`);
-        reservasSeccion.scrollIntoView({ behavior: "smooth" });
-      } else {
-        showToast(`Estilo "${selectedCatalogService}" seleccionado. Redirigiendo a reservas...`);
-        setTimeout(() => {
-          window.location.href = "reservas.html";
-        }, 1200);
-      }
+      showToast(`Añadido: "${btn.dataset.title}". Revisa tu reserva al final.`);
     });
   });
 }
