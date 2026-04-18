@@ -1,5 +1,5 @@
 /**
- * Glam Hub — Main Script (Multipages)
+ * Floys Beauty — Main Script (Multipages)
  * Contiene animaciones GSAP, lógica del catálogo, portafolio y botón de reserva de WhatsApp.
  */
 
@@ -11,8 +11,10 @@ const WHATSAPP_NUMERO = "573226624007";
 
 
 let selectedCatalogService = null;
+let selectedCatalogServiceImg = null;
 if (typeof localStorage !== "undefined") {
   selectedCatalogService = localStorage.getItem("glamHubSelectedService") || null;
+  selectedCatalogServiceImg = localStorage.getItem("glamHubSelectedImg") || null;
 }
 
 /**
@@ -93,8 +95,10 @@ function wireUi() {
 
     if (typeof localStorage !== "undefined") {
       localStorage.removeItem("glamHubSelectedService");
+      localStorage.removeItem("glamHubSelectedImg");
     }
     selectedCatalogService = null;
+    selectedCatalogServiceImg = null;
     updateBookingPreview();
   });
 
@@ -166,22 +170,73 @@ function initAnimations() {
 // ---------------------------------------------------------------------------
 // Nuevas Funcionalidades: Catálogo, Portafolio, Guardar Look
 // ---------------------------------------------------------------------------
+const PORTFOLIO_DATA = {
+  social: [
+    "https://images.unsplash.com/photo-1512496115841-a01baf15628e?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1599423653151-c0e86b24feea?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=800&q=80"
+  ],
+  novia: [
+    "https://images.unsplash.com/photo-1506085449019-3253baf6ab29?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1549424750-1c05d76d4db7?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1582649033355-6b5cf0bfb6af?auto=format&fit=crop&w=800&q=80"
+  ],
+  quinceanera: [
+    "https://images.unsplash.com/photo-1516975080661-46bdcb3961bb?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1515688594390-b649af70d282?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1505027429184-bba91b2bf1d1?auto=format&fit=crop&w=800&q=80"
+  ],
+  glam_noche: [
+    "https://images.unsplash.com/photo-1503236823255-94609f592e73?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1516975080661-46bdcb3961bb?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=800&q=80"
+  ],
+  social_dia_noche: [
+    "https://images.unsplash.com/photo-1596704017254-9b121068fb21?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1512496115841-a01baf15628e?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1506085449019-3253baf6ab29?auto=format&fit=crop&w=800&q=80"
+  ],
+  fotos_pasarela: [
+    "https://images.unsplash.com/photo-1616086708688-660c6d79e5ba?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1632168925203-b0e6bf3d2b27?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1503236823255-94609f592e73?auto=format&fit=crop&w=800&q=80"
+  ],
+  cejas: [
+    "https://images.unsplash.com/photo-1620067081745-f0ea996ea354?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1599423653151-c0e86b24feea?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1512496115841-a01baf15628e?auto=format&fit=crop&w=800&q=80"
+  ],
+  pestanas: [
+    "https://images.unsplash.com/photo-1620067081745-f0ea996ea354?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1596704017254-9b121068fb21?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1503236823255-94609f592e73?auto=format&fit=crop&w=800&q=80"
+  ]
+};
 
 const CATALOG_DATA = {
   social: [
-    { title: "Glam Radiante", desc: "Piel luminosa, tonos neutros y labios gloss.", img: "https://images.unsplash.com/photo-1512496115841-a01baf15628e?auto=format&fit=crop&w=400&q=80" },
-    { title: "Soft Matte", desc: "Acabado aterciopelado, larga duración ideal para fotos.", img: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=400&q=80" },
-    { title: "Fiesta de noche", desc: "Ojos ahumados o destellos sutiles para destacar.", img: "https://images.unsplash.com/photo-1516975080661-46bdcb3961bb?auto=format&fit=crop&w=400&q=80" }
+    { title: "Maquillaje Social Clásico", desc: "Piel luminosa, tonos neutros y labios gloss.", img: "https://images.unsplash.com/photo-1512496115841-a01baf15628e?auto=format&fit=crop&w=400&q=80" }
   ],
-  profesional: [
-    { title: "Editorial Alta Costura", desc: "Propuesta vanguardista y texturas arriesgadas.", img: "https://images.unsplash.com/photo-1596704017254-9b121068fb21?auto=format&fit=crop&w=400&q=80" },
-    { title: "Look Pasarela", desc: "Énfasis dramático ajustado a la dirección de arte.", img: "https://images.unsplash.com/photo-1503236823255-94609f592e73?auto=format&fit=crop&w=400&q=80" },
-    { title: "Beauty Macro", desc: "Piel impecable HD y detalle minucioso.", img: "https://images.unsplash.com/photo-1599423653151-c0e86b24feea?auto=format&fit=crop&w=400&q=80" }
+  novia: [
+    { title: "Look de Novia Radiante", desc: "Acabado de larga duración perfecto para el día de tu boda.", img: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=400&q=80" }
   ],
-  artistico: [
-    { title: "Neón Cyberpunk", desc: "Colores vibrantes UV y delineados gráficos.", img: "https://images.unsplash.com/photo-1616086708688-660c6d79e5ba?auto=format&fit=crop&w=400&q=80" },
-    { title: "Fantasía & FX", desc: "Caracterización, pedrería y apliques creativos.", img: "https://images.unsplash.com/photo-1632168925203-b0e6bf3d2b27?auto=format&fit=crop&w=400&q=80" },
-    { title: "Avant-Garde", desc: "Conceptos libres y expresiones fuera de lo común.", img: "https://images.unsplash.com/photo-1506085449019-3253baf6ab29?auto=format&fit=crop&w=400&q=80" }
+  quinceanera: [
+    { title: "Quinceañera Princesa", desc: "Toques sutiles y luminosos para un look juvenil y elegante.", img: "https://images.unsplash.com/photo-1516975080661-46bdcb3961bb?auto=format&fit=crop&w=400&q=80" }
+  ],
+  glam_noche: [
+    { title: "Glam de Noche Intensivo", desc: "Ojos ahumados o destellos vibrantes para destacar bajo la luna.", img: "https://images.unsplash.com/photo-1503236823255-94609f592e73?auto=format&fit=crop&w=400&q=80" }
+  ],
+  social_dia_noche: [
+    { title: "Look Transición", desc: "Maquillaje versátil que dura todo el día y destaca en la noche.", img: "https://images.unsplash.com/photo-1599423653151-c0e86b24feea?auto=format&fit=crop&w=400&q=80" }
+  ],
+  fotos_pasarela: [
+    { title: "Editorial HD", desc: "Piel impecable, contrastes dramáticos aptos para cámaras profesionales.", img: "https://images.unsplash.com/photo-1596704017254-9b121068fb21?auto=format&fit=crop&w=400&q=80" }
+  ],
+  cejas: [
+    { title: "Diseño de Cejas HD", desc: "Perfilado, laminado o henna para un marco perfecto en tu rostro.", img: "https://images.unsplash.com/photo-1616086708688-660c6d79e5ba?auto=format&fit=crop&w=400&q=80" }
+  ],
+  pestanas: [
+    { title: "Lifting y Extensiones", desc: "Pestañas con volumen, curva y un efecto de mirada impactante.", img: "https://images.unsplash.com/photo-1632168925203-b0e6bf3d2b27?auto=format&fit=crop&w=400&q=80" }
   ]
 };
 
@@ -215,8 +270,12 @@ function updateBookingPreview() {
   if (source === 'catalogo') {
     if (selectedCatalogService) {
       previewContainer.classList.add('has-data');
-      previewContainer.innerHTML = `<div class="booking-info">
-        <strong>Selección:</strong> <span style="margin-left:8px; color:var(--text);">${selectedCatalogService}</span>
+      previewContainer.innerHTML = `<div class="booking-info" style="display:flex; align-items:center; gap: 1rem;">
+        ${selectedCatalogServiceImg ? `<img src="${selectedCatalogServiceImg}" alt="Preview" style="width: 55px; height: 55px; border-radius: 8px; object-fit: cover; border: 1px solid var(--glass-border); flex-shrink: 0;" />` : ''}
+        <div style="display:flex; flex-direction:column;">
+          <strong style="color:var(--primary); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px;">Del catálogo</strong>
+          <span style="color:var(--text); font-weight:600; font-size: 1.05rem;">${selectedCatalogService}</span>
+        </div>
       </div>`;
     } else {
       previewContainer.classList.add('empty');
@@ -240,7 +299,7 @@ function loadCatalog(category) {
       <div class="catalog-card-content">
         <h3 class="catalog-card-title">${item.title}</h3>
         <p class="catalog-card-desc">${item.desc}</p>
-        <button type="button" class="btn btn-primary btn-glow btn-select-service" data-title="${item.title}">Seleccionar estilo</button>
+        <button type="button" class="btn btn-primary btn-glow btn-select-service" data-title="${item.title}" data-img="${item.img}">Seleccionar estilo</button>
       </div>
     </article>
   `).join("");
@@ -248,8 +307,10 @@ function loadCatalog(category) {
   document.querySelectorAll(".btn-select-service").forEach(btn => {
     btn.addEventListener("click", () => {
       selectedCatalogService = btn.dataset.title;
+      selectedCatalogServiceImg = btn.dataset.img;
       if (typeof localStorage !== "undefined") {
         localStorage.setItem("glamHubSelectedService", selectedCatalogService);
+        localStorage.setItem("glamHubSelectedImg", selectedCatalogServiceImg);
       }
 
       const radio = document.querySelector('input[name="makeup_source"][value="catalogo"]');
@@ -302,14 +363,29 @@ function initNewFeatures() {
 
   loadCatalog("social");
 
-  // Portafolio Modal
+  // Portafolio Modal Galeria
   const modal = document.getElementById("portfolio-modal");
-  const modalImg = document.getElementById("portfolio-modal-img");
+  const modalGrid = document.getElementById("portfolio-gallery-grid");
+  const modalTitle = document.getElementById("portfolio-modal-title");
   const closeBtn = document.getElementById("portfolio-close");
 
-  const openModal = (src) => {
-    if (!modal || !modalImg) return;
-    modalImg.src = src;
+  const openModal = (categoryName, imageUrls) => {
+    if (!modal || !modalGrid) return;
+    if (modalTitle) modalTitle.textContent = categoryName;
+    modalGrid.innerHTML = imageUrls.map(url => `<img src="${url}" alt="${categoryName}" loading="lazy" class="lightbox-trigger" style="cursor: zoom-in;" />`).join("");
+    
+    // Bind Lightbox clicks
+    const lbModal = document.getElementById("lightbox-modal");
+    const lbImg = document.getElementById("lightbox-img");
+    modalGrid.querySelectorAll(".lightbox-trigger").forEach(img => {
+      img.addEventListener("click", () => {
+        if (lbModal && lbImg) {
+          lbImg.src = img.src;
+          lbModal.classList.add("active");
+        }
+      });
+    });
+
     modal.classList.add("active");
     document.body.style.overflow = "hidden";
   };
@@ -318,12 +394,27 @@ function initNewFeatures() {
     if (!modal) return;
     modal.classList.remove("active");
     document.body.style.overflow = "";
+    if (modalGrid) modalGrid.innerHTML = "";
   };
+
+  // Close Lightbox
+  const lbModal = document.getElementById("lightbox-modal");
+  const lbCloseBtn = document.getElementById("lightbox-close");
+  const closeLb = () => {
+    if (lbModal) lbModal.classList.remove("active");
+  };
+  lbCloseBtn?.addEventListener("click", closeLb);
+  lbModal?.addEventListener("click", (e) => {
+    if (e.target === lbModal || e.target.tagName.toLowerCase() !== 'img') closeLb();
+  });
 
   document.querySelectorAll(".portfolio-item").forEach(item => {
     item.addEventListener("click", () => {
-      const src = item.dataset.image;
-      if (src) openModal(src);
+      const catId = item.dataset.category;
+      if (catId && PORTFOLIO_DATA[catId]) {
+        const catName = item.querySelector("figcaption")?.textContent || "Portafolio";
+        openModal(catName, PORTFOLIO_DATA[catId]);
+      }
     });
   });
 
