@@ -187,6 +187,7 @@ const PORTFOLIO_DATA = {
     "https://images.unsplash.com/photo-1505027429184-bba91b2bf1d1?auto=format&fit=crop&w=800&q=80"
   ],
   glam_noche: [
+    "Golden Shine.png",
     "https://images.unsplash.com/photo-1503236823255-94609f592e73?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1516975080661-46bdcb3961bb?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=800&q=80"
@@ -197,6 +198,8 @@ const PORTFOLIO_DATA = {
     "https://images.unsplash.com/photo-1506085449019-3253baf6ab29?auto=format&fit=crop&w=800&q=80"
   ],
   fotos_pasarela: [
+    "pasarela.png",
+    "foto.png",
     "https://images.unsplash.com/photo-1616086708688-660c6d79e5ba?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1632168925203-b0e6bf3d2b27?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1503236823255-94609f592e73?auto=format&fit=crop&w=800&q=80"
@@ -224,13 +227,15 @@ const CATALOG_DATA = {
     { title: "Quinceañera Princesa", desc: "Toques sutiles y luminosos para un look juvenil y elegante.", img: "https://images.unsplash.com/photo-1516975080661-46bdcb3961bb?auto=format&fit=crop&w=400&q=80" }
   ],
   glam_noche: [
+    { title: "Golden Shine", desc: "Mirada dorada intensa, piel radiante, labios glossy, elegancia nocturna impactante.", img: "Golden Shine.png" },
     { title: "Glam de Noche Intensivo", desc: "Ojos ahumados o destellos vibrantes para destacar bajo la luna.", img: "https://images.unsplash.com/photo-1503236823255-94609f592e73?auto=format&fit=crop&w=400&q=80" }
   ],
   social_dia_noche: [
     { title: "Look Transición", desc: "Maquillaje versátil que dura todo el día y destaca en la noche.", img: "https://images.unsplash.com/photo-1599423653151-c0e86b24feea?auto=format&fit=crop&w=400&q=80" }
   ],
   fotos_pasarela: [
-    { title: "Editorial HD", desc: "Piel impecable, contrastes dramáticos aptos para cámaras profesionales.", img: "https://images.unsplash.com/photo-1596704017254-9b121068fb21?auto=format&fit=crop&w=400&q=80" }
+    { title: "Pasarela Blue Royal Glam", desc: "Impacto visual azul metálico, elegancia afro, brillo intenso, glamour fotográfico", img: "pasarela.png" },
+    { title: "Maquillaje Ice Glam Afro Chic", desc: "Mirada intensa azul, brillo sofisticado, estilo afro elegante, impactante, fotográfico.", img: "foto.png" }
   ],
   cejas: [
     { title: "Diseño de Cejas HD", desc: "Perfilado, laminado o henna para un marco perfecto en tu rostro.", img: "https://images.unsplash.com/photo-1616086708688-660c6d79e5ba?auto=format&fit=crop&w=400&q=80" }
