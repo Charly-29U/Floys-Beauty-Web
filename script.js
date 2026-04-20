@@ -176,6 +176,7 @@ const PORTFOLIO_DATA = {
     "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=800&q=80"
   ],
   novia: [
+    "novia_civil.png",
     "https://images.unsplash.com/photo-1506085449019-3253baf6ab29?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1549424750-1c05d76d4db7?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1582649033355-6b5cf0bfb6af?auto=format&fit=crop&w=800&q=80"
