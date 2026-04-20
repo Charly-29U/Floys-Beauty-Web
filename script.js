@@ -217,7 +217,7 @@ const CATALOG_DATA = {
     { title: "Maquillaje Social Clásico", desc: "Piel luminosa, tonos neutros y labios gloss.", img: "https://images.unsplash.com/photo-1512496115841-a01baf15628e?auto=format&fit=crop&w=400&q=80" }
   ],
   novia: [
-    { title: "Look de Novia Radiante", desc: "Acabado de larga duración perfecto para el día de tu boda.", img: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=400&q=80" }
+    { title: "Novia Civil", desc: "Maquillaje de novia clásico, mate y sencillo, ideal para juzgado.", img: "novia_civil.png" }
   ],
   quinceanera: [
     { title: "Quinceañera Princesa", desc: "Toques sutiles y luminosos para un look juvenil y elegante.", img: "https://images.unsplash.com/photo-1516975080661-46bdcb3961bb?auto=format&fit=crop&w=400&q=80" }
