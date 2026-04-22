@@ -184,6 +184,7 @@ const PORTFOLIO_DATA = {
     "https://images.unsplash.com/photo-1582649033355-6b5cf0bfb6af?auto=format&fit=crop&w=800&q=80"
   ],
   quinceanera: [
+    "xv_eternal.png",
     "xv_royal.png",
     "https://images.unsplash.com/photo-1516975080661-46bdcb3961bb?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1515688594390-b649af70d282?auto=format&fit=crop&w=800&q=80",
@@ -230,6 +231,7 @@ const CATALOG_DATA = {
     { title: "Radiant Bridal Minimalist", desc: "Elegancia pura con piel radiante, labios definidos y mirada sutil. El equilibrio perfecto entre naturalidad y lujo.", img: "novia_soft_glam.png" }
   ],
   quinceanera: [
+    { title: "Quinceañera Eternal Glam", desc: "Sofisticación atemporal con tonos tierra y piel impecable para destacar con un estilo pulido y elegante.", img: "xv_eternal.png" },
     { title: "Quinceañera Royal Glam", desc: "Un look soñado con destellos dorados, mirada intensa y piel radiante para tu noche mágica.", img: "xv_royal.png" },
     { title: "Quinceañera Princesa", desc: "Toques sutiles y luminosos para un look juvenil y elegante.", img: "https://images.unsplash.com/photo-1516975080661-46bdcb3961bb?auto=format&fit=crop&w=400&q=80" }
   ],
