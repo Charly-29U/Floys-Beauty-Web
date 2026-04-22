@@ -171,17 +171,20 @@ function initAnimations() {
 // ---------------------------------------------------------------------------
 const PORTFOLIO_DATA = {
   social: [
+    "social_peach.png",
     "https://images.unsplash.com/photo-1512496115841-a01baf15628e?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1599423653151-c0e86b24feea?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=800&q=80"
   ],
   novia: [
-    "novia_civil.png",
+    "novia_ceremonia.png",
+    "novia_soft_glam.png",
     "https://images.unsplash.com/photo-1506085449019-3253baf6ab29?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1549424750-1c05d76d4db7?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1582649033355-6b5cf0bfb6af?auto=format&fit=crop&w=800&q=80"
   ],
   quinceanera: [
+    "xv_royal.png",
     "https://images.unsplash.com/photo-1516975080661-46bdcb3961bb?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1515688594390-b649af70d282?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1505027429184-bba91b2bf1d1?auto=format&fit=crop&w=800&q=80"
@@ -193,6 +196,7 @@ const PORTFOLIO_DATA = {
     "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=800&q=80"
   ],
   social_dia_noche: [
+    "social_dia.png",
     "https://images.unsplash.com/photo-1596704017254-9b121068fb21?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1512496115841-a01baf15628e?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1506085449019-3253baf6ab29?auto=format&fit=crop&w=800&q=80"
@@ -218,12 +222,15 @@ const PORTFOLIO_DATA = {
 
 const CATALOG_DATA = {
   social: [
+    { title: "Natural Peach Glow", desc: "Look fresco con tonos durazno, piel natural y delineado sutil para resaltar tu belleza diaria.", img: "social_peach.png" },
     { title: "Maquillaje Social Clásico", desc: "Piel luminosa, tonos neutros y labios gloss.", img: "https://images.unsplash.com/photo-1512496115841-a01baf15628e?auto=format&fit=crop&w=400&q=80" }
   ],
   novia: [
-    { title: "Novia Civil", desc: "Maquillaje de novia clásico, mate y sencillo, ideal para juzgado.", img: "novia_civil.png" }
+    { title: "Glam Bridal Ceremony", desc: "Look sofisticado con cut-crease definido, delineado con destellos y piel impecable para tu boda.", img: "novia_ceremonia.png" },
+    { title: "Radiant Bridal Minimalist", desc: "Elegancia pura con piel radiante, labios definidos y mirada sutil. El equilibrio perfecto entre naturalidad y lujo.", img: "novia_soft_glam.png" }
   ],
   quinceanera: [
+    { title: "Quinceañera Royal Glam", desc: "Un look soñado con destellos dorados, mirada intensa y piel radiante para tu noche mágica.", img: "xv_royal.png" },
     { title: "Quinceañera Princesa", desc: "Toques sutiles y luminosos para un look juvenil y elegante.", img: "https://images.unsplash.com/photo-1516975080661-46bdcb3961bb?auto=format&fit=crop&w=400&q=80" }
   ],
   glam_noche: [
@@ -231,7 +238,8 @@ const CATALOG_DATA = {
     { title: "Glam de Noche Intensivo", desc: "Ojos ahumados o destellos vibrantes para destacar bajo la luna.", img: "https://images.unsplash.com/photo-1503236823255-94609f592e73?auto=format&fit=crop&w=400&q=80" }
   ],
   social_dia_noche: [
-    { title: "Look Transición", desc: "Maquillaje versátil que dura todo el día y destaca en la noche.", img: "https://images.unsplash.com/photo-1599423653151-c0e86b24feea?auto=format&fit=crop&w=400&q=80" }
+    { title: "Sunkissed Social Glam", desc: "Maquillaje cálido con piel ultra radiante y tonos tierra, ideal para eventos elegantes bajo el sol.", img: "social_dia.png" },
+    { title: "Look Transición", desc: "Maquillaje versátil que dura todo el día y destaca en la noche.", img: "https://images.unsplash.com/photo-1596704017254-9b121068fb21?auto=format&fit=crop&w=400&q=80" }
   ],
   fotos_pasarela: [
     { title: "Pasarela Blue Royal Glam", desc: "Impacto visual azul metálico, elegancia afro, brillo intenso, glamour fotográfico", img: "pasarela.png" },
