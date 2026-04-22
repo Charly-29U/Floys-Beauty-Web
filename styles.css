@@ -135,26 +135,30 @@ body {
 }
 
 .nav {
-  display: none;
-  gap: 1.25rem;
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
 }
 
-@media (min-width: 380px) {
+.nav a {
+  font-size: 0.72rem;
+}
+
+@media (min-width: 480px) {
   .nav {
-    display: flex;
-    gap: 0.8rem;
+    gap: 1rem;
   }
   .nav a {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
   }
 }
 
 @media (min-width: 768px) {
   .nav {
-    gap: 1.25rem;
+    gap: 1.5rem;
   }
   .nav a {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
   }
 }
 
