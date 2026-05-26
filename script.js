@@ -171,7 +171,9 @@ function initAnimations() {
 // ---------------------------------------------------------------------------
 const PORTFOLIO_DATA = {
   social: [
+    "social_dia_look.png",
     "social_peach.png",
+    "social_noche.jpg",
     "https://images.unsplash.com/photo-1512496115841-a01baf15628e?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1599423653151-c0e86b24feea?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=800&q=80"
@@ -210,6 +212,7 @@ const PORTFOLIO_DATA = {
     "https://images.unsplash.com/photo-1503236823255-94609f592e73?auto=format&fit=crop&w=800&q=80"
   ],
   cejas: [
+    "cejas_hd_new.png",
     "https://images.unsplash.com/photo-1620067081745-f0ea996ea354?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1599423653151-c0e86b24feea?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1512496115841-a01baf15628e?auto=format&fit=crop&w=800&q=80"
@@ -223,8 +226,9 @@ const PORTFOLIO_DATA = {
 
 const CATALOG_DATA = {
   social: [
+    { title: "Social de Día Glam", desc: "Maquillaje fresco y radiante con trenzas elegantes, piel luminosa y delineado sutil para brillar de día.", img: "social_dia_look.png" },
     { title: "Natural Peach Glow", desc: "Look fresco con tonos durazno, piel natural y delineado sutil para resaltar tu belleza diaria.", img: "social_peach.png" },
-    { title: "Maquillaje Social Clásico", desc: "Piel luminosa, tonos neutros y labios gloss.", img: "https://images.unsplash.com/photo-1512496115841-a01baf15628e?auto=format&fit=crop&w=400&q=80" }
+    { title: "Coral Sunset Glam", desc: "Maquillaje cálido con sombras cobrizas, piel luminosa y labios coral para brillar en eventos de día.", img: "social_noche.jpg" }
   ],
   novia: [
     { title: "Glam Bridal Ceremony", desc: "Look sofisticado con cut-crease definido, delineado con destellos y piel impecable para tu boda.", img: "novia_ceremonia.png" },
@@ -240,7 +244,7 @@ const CATALOG_DATA = {
     { title: "Glam de Noche Intensivo", desc: "Ojos ahumados o destellos vibrantes para destacar bajo la luna.", img: "https://images.unsplash.com/photo-1503236823255-94609f592e73?auto=format&fit=crop&w=400&q=80" }
   ],
   social_dia_noche: [
-    { title: "Sunkissed Social Glam", desc: "Maquillaje cálido con piel ultra radiante y tonos tierra, ideal para eventos elegantes bajo el sol.", img: "social_dia.png" },
+    { title: "Noche Quieta Glam", desc: "Look intenso con sombras oscuras, piel impecable y labios nude glossy para una noche espectacular.", img: "social_dia.png" },
     { title: "Look Transición", desc: "Maquillaje versátil que dura todo el día y destaca en la noche.", img: "https://images.unsplash.com/photo-1596704017254-9b121068fb21?auto=format&fit=crop&w=400&q=80" }
   ],
   fotos_pasarela: [
@@ -248,7 +252,7 @@ const CATALOG_DATA = {
     { title: "Maquillaje Ice Glam Afro Chic", desc: "Mirada intensa azul, brillo sofisticado, estilo afro elegante, impactante, fotográfico.", img: "foto.png" }
   ],
   cejas: [
-    { title: "Diseño de Cejas HD", desc: "Perfilado, laminado o henna para un marco perfecto en tu rostro.", img: "https://images.unsplash.com/photo-1616086708688-660c6d79e5ba?auto=format&fit=crop&w=400&q=80" }
+    { title: "Diseño de Cejas HD", desc: "Perfilado, laminado o henna para un marco perfecto en tu rostro.", img: "cejas_hd_new.png" }
   ],
   pestanas: [
     { title: "Lifting y Extensiones", desc: "Pestañas con volumen, curva y un efecto de mirada impactante.", img: "https://images.unsplash.com/photo-1632168925203-b0e6bf3d2b27?auto=format&fit=crop&w=400&q=80" }
@@ -322,7 +326,7 @@ function loadCatalog(category) {
   const items = CATALOG_DATA[category] || [];
   grid.innerHTML = items.map(item => `
     <article class="catalog-card glass">
-      <img src="${item.img}" alt="${item.title}" class="catalog-card-img" loading="lazy" />
+      <img src="${item.img}" alt="${item.title}" class="catalog-card-img" loading="lazy" onerror="this.closest('.catalog-card').style.display='none'" />
       <div class="catalog-card-content">
         <h3 class="catalog-card-title">${item.title}</h3>
         <p class="catalog-card-desc">${item.desc}</p>
@@ -388,7 +392,7 @@ function initNewFeatures() {
   const openModal = (categoryName, imageUrls) => {
     if (!modal || !modalGrid) return;
     if (modalTitle) modalTitle.textContent = categoryName;
-    modalGrid.innerHTML = imageUrls.map(url => `<img src="${url}" alt="${categoryName}" loading="lazy" class="lightbox-trigger" style="cursor: zoom-in;" />`).join("");
+    modalGrid.innerHTML = imageUrls.map(url => `<img src="${url}" alt="${categoryName}" loading="lazy" class="lightbox-trigger" style="cursor: zoom-in;" onerror="this.style.display='none'" />`).join("");
     
     // Bind Lightbox clicks
     const lbModal = document.getElementById("lightbox-modal");
